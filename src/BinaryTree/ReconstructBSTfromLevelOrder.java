@@ -14,10 +14,10 @@ public class ReconstructBSTfromLevelOrder {
         if (root == null) {
             return new TreeNode(data);
         }
-        if (data <= root.key) {
+        if (data <= root.val) {
             root.left = helper(root.left, data);
         }
-        if (data > root.key) {
+        if (data > root.val) {
             root.right = helper(root.right, data);
         }
         return root;

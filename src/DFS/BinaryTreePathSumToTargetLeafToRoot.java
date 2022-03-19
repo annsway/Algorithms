@@ -34,7 +34,7 @@ public class BinaryTreePathSumToTargetLeafToRoot {
             return false;
         }
         // pre-order traversal
-        curSum += root.key;
+        curSum += root.val;
         if (root.left == null && root.right == null && curSum == target) {
             return true;
         }

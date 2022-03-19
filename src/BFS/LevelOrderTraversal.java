@@ -24,7 +24,7 @@ public class LevelOrderTraversal {
             List<Integer> level = new ArrayList<>();
             for (int i = 0; i < size; i++) {
                 TreeNode cur = queue.poll();
-                level.add(cur.key);
+                level.add(cur.val);
                 if (cur.left != null) {
                     queue.offer(cur.left);
                 }

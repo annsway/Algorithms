@@ -1,10 +1,9 @@
 package OOP;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 class CalculatorTest {
 
-    @org.junit.jupiter.api.Test
     void plus() {
 //        fail("Not yet implemented. ");
         Calculator c = new Calculator();

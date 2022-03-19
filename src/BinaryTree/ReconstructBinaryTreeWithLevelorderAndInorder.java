@@ -24,14 +24,14 @@ public class ReconstructBinaryTreeWithLevelorderAndInorder {
         List<Integer> rightSubtree = new ArrayList<>();
         for (int num : levelOrderList) {
             // compare the [indices] of the root node and the current node in the in order traversal
-            if (inOrderMap.get(num) < inOrderMap.get(root.key)) {
+            if (inOrderMap.get(num) < inOrderMap.get(root.val)) {
                 leftSubtree.add(num);
             } else {
                 rightSubtree.add(num);
             }
         }
-        root.left = helper(leftSubtree, leftIO, inOrderMap.get(root.key) - 1);
-        root.right = helper(rightSubtree, inOrderMap.get(root.key) + 1, rightIO);
+        root.left = helper(leftSubtree, leftIO, inOrderMap.get(root.val) - 1);
+        root.right = helper(rightSubtree, inOrderMap.get(root.val) + 1, rightIO);
         return root;
     }
 }

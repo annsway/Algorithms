@@ -1,7 +1,5 @@
 package BinaryTree;
 
-import static BinaryTree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
-
 public class ReconstructBSTfromPreorder {
     int i = 0;
     public TreeNode reconstruct(int[] A) {
@@ -12,7 +10,7 @@ public class ReconstructBSTfromPreorder {
             return null;
         }
         TreeNode root = new TreeNode(A[i++]);
-        root.left = helper(A, root.key);
+        root.left = helper(A, root.val);
         root.right = helper(A, bound);
         return root;
     }

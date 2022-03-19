@@ -33,7 +33,7 @@ public class CreateBSTusingLevelOrder {
     public static void inorder(TreeNode root) {
         if (root != null) {
             inorder(root.left);
-            System.out.print(root.key + " ");
+            System.out.print(root.val + " ");
             inorder(root.right);
         }
     }
@@ -65,9 +65,9 @@ public class CreateBSTusingLevelOrder {
         if (root == null) {
             return new TreeNode(value);
         }
-        if (value != null && value < root.key) {
+        if (value != null && value < root.val) {
             root.left = insert(root.left, value);
-        } else if (value != null && value > root.key) {
+        } else if (value != null && value > root.val) {
             root.right = insert(root.right, value);
         }
         return root;

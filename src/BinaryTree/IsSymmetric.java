@@ -17,7 +17,7 @@ public class IsSymmetric {
             return true;
         } else if (one == null || two == null) {
             return false;
-        } else if (one.key == two.key) {
+        } else if (one.val == two.val) {
             return true;
         }
         return helper(one.left, two.right) && helper(one.right, two.left);

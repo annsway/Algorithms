@@ -26,7 +26,7 @@ public class ZigZacLevelOrderTraversal {
             for (int i = 0; i < curSize; i++) {
                 if (layer == 0) {
                     TreeNode cur = s.pollLast();
-                    res.add(cur.key);
+                    res.add(cur.val);
                     if (cur.right != null) {
                         s.offerFirst(cur.right);
                     }
@@ -35,7 +35,7 @@ public class ZigZacLevelOrderTraversal {
                     }
                 } else {
                     TreeNode cur = s.pollFirst();
-                    res.add(cur.key);
+                    res.add(cur.val);
                     if (cur.left != null) {
                         s.offerLast(cur.left);
                     }

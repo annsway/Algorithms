@@ -23,7 +23,7 @@ public class IsTweaked {
         if (one == null && two == null) {
             return true;
         }
-        if (one == null || two == null || one.key != two.key) {
+        if (one == null || two == null || one.val != two.val) {
             return false;
         }
         return isTweakedIdentical(one.left, two.left) && isTweakedIdentical(one.right, two.right)

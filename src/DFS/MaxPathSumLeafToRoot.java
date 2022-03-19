@@ -26,7 +26,7 @@ public class MaxPathSumLeafToRoot {
             return;
         }
         // For each level, pre-order traversal, add the current root.key to the curSum
-        curSum += root.key;
+        curSum += root.val;
         DFS(root.left, curSum, globalMax);
         DFS(root.right, curSum, globalMax);
         if (root.left == null && root.right == null) { // update globalMax[0] only if reaches to leaf node
