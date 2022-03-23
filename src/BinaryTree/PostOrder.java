@@ -31,11 +31,11 @@ public class PostOrder {
                     stack.offerFirst(cur.right);
                 } else {
                     stack.pollFirst();
-                    res.add(cur.key);
+                    res.add(cur.val);
                 }
             } else if (prev == cur.right || prev == cur.left && cur.right == null) {
                 stack.pollFirst();
-                res.add(cur.key);
+                res.add(cur.val);
             } else {
                 stack.offerFirst(cur.right);
             }

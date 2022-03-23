@@ -46,6 +46,6 @@ public class LCA_III {
         String[] array = {"-5", "-2", "-1", "9", "#", "-6", "-4"};
         TreeNode root = reconstructBT(array);
         // test
-        System.out.println(lowestCommonAncestor(root, root.left, root.left.left).key);
+        System.out.println(lowestCommonAncestor(root, root.left, root.left.left).val);
     }
 }

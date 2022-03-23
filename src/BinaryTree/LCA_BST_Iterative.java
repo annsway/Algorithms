@@ -8,9 +8,9 @@ public class LCA_BST_Iterative {
         int small = Math.min(p, q);
         int large = Math.max(p, q);
         while (root != null) {
-            if (root.key < small) {
+            if (root.val < small) {
                 root = root.right;
-            } else if (root.key > large) {
+            } else if (root.val > large) {
                 root = root.left;
             } else {
                 return root;
@@ -31,6 +31,6 @@ public class LCA_BST_Iterative {
 
         TreeNode root = reconstructBST(array);
         TreeNode LCA = lca(root, 1, 2);
-        System.out.println(LCA.key);
+        System.out.println(LCA.val);
     }
 }

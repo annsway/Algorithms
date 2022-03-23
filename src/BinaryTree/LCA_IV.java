@@ -48,6 +48,6 @@ public class LCA_IV {
         set.add(root.left);
         set.add(root.right);
         // test
-        System.out.println(lowestCommonAncestor(root, set).key);
+        System.out.println(lowestCommonAncestor(root, set).val);
     }
 }

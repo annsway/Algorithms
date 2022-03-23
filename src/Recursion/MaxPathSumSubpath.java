@@ -38,8 +38,8 @@ public class MaxPathSumSubpath {
         }
         int leftMax = helper(root.left, globalMax);
         int rightMax = helper(root.right, globalMax);
-        globalMax[0] = Math.max(globalMax[0], Math.max(root.key, root.key + Math.max(leftMax, rightMax)));
-        return Math.max(root.key, root.key + Math.max(leftMax, rightMax));
+        globalMax[0] = Math.max(globalMax[0], Math.max(root.val, root.val + Math.max(leftMax, rightMax)));
+        return Math.max(root.val, root.val + Math.max(leftMax, rightMax));
     }
 
     public static void main(String[] args) {

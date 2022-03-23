@@ -11,7 +11,7 @@ public class IsIdentical {
             return false;
         }
         // subproblems
-        if (one.key == two.key) {
+        if (one.val == two.val) {
             return isIdentical(one.left, two.left) && isIdentical(one.right, two.right);
         } else {
             return false;

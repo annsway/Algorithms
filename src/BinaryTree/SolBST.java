@@ -8,7 +8,7 @@ public class SolBST {
         if (root == null) {
             return root;
         }
-        if (root.key == target) { // we want to delete root
+        if (root.val == target) { // we want to delete root
             // base case 1: target has no left or right child
             if (root.left == null && root.right == null) {
                 return null;
@@ -32,9 +32,9 @@ public class SolBST {
             }
         }
         // if target not found, do recursion
-        if (target < root.key) {
+        if (target < root.val) {
             root.left = deleteTree(root.left, target); // 这里返回的是root的子树，而非root本身！
-        } else if (target > root.key) {
+        } else if (target > root.val) {
             root.right = deleteTree(root.right, target);
         }
         return root;

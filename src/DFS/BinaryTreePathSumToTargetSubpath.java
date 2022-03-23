@@ -81,7 +81,7 @@ public class BinaryTreePathSumToTargetSubpath {
         if (prefixSums.contains(prefixSum - target)) {
             return true;
         }
-        prefixSum += root.key;
+        prefixSum += root.val;
         prefixSums.add(prefixSum);
         return dfs(root.left, target) || dfs(root.right, target);
     }

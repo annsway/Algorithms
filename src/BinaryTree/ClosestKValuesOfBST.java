@@ -81,7 +81,7 @@ public class ClosestKValuesOfBST {
         int[] res = new int[queue.size()];
         int i = 0;
         while (!queue.isEmpty()) {
-            res[i++] = queue.poll().key;
+            res[i++] = queue.poll().val;
         }
         return res;
     }
@@ -92,7 +92,7 @@ public class ClosestKValuesOfBST {
         inOrder(root.left, queue, target, k);
         if (queue.size() < k) {
             queue.offer(root);
-        } else if(queue.size() == k && Math.abs(queue.peek().key - target) > Math.abs(root.key - target)) {
+        } else if(queue.size() == k && Math.abs(queue.peek().val - target) > Math.abs(root.val - target)) {
             queue.poll();
             queue.offer(root);
         }

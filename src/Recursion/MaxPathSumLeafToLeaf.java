@@ -34,8 +34,8 @@ public class MaxPathSumLeafToLeaf {
         int leftMax = maxPathSum(root.left, globalMax);
         int rightMax = maxPathSum(root.right, globalMax);
         if (root.left != null && root.right != null) {
-            globalMax[0] = Math.max(globalMax[0], leftMax + rightMax + root.key);
-            return Math.max(leftMax + root.key, rightMax + root.key);
+            globalMax[0] = Math.max(globalMax[0], leftMax + rightMax + root.val);
+            return Math.max(leftMax + root.val, rightMax + root.val);
 /** Q: 为什么这里需要return？
  * A: 因为有可能出现左右均有孩子的情况，这里比较大小并 return 最大path sum，会避免left比right小，反而返回left path sum的错误情况。
         -9
@@ -43,7 +43,7 @@ public class MaxPathSumLeafToLeaf {
      -60  89     */
         }
 //        return Math.max(leftMax, rightMax) + root.key; // WRONG!
-        return root.left == null ? rightMax + root.key : leftMax + root.key;
+        return root.left == null ? rightMax + root.val : leftMax + root.val;
 /** Q: 为什么必须要 check if root.left == null ?
  A: case 1: either left child == null or right child == null
  因为base case 这里将null设为0, 如果不check 是否单边为null, 那么会出现 null -> 0, right -> -1, return 0 的错误情况。
