@@ -6,27 +6,26 @@ import java.util.Map;
 public class ReconstructBinaryTreeWithPostorderAndInorder {
     Map<Integer, Integer> inOrderMap = new HashMap<>();
     int postOrderIndex;
-    public TreeNode reconstruct(int[] inOrder, int[] postOrder) {
-        postOrderIndex = postOrder.length - 1;
-        for (int i = 0; i < inOrder.length; i++) {
-            inOrderMap.put(inOrder[i], i);
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        postOrderIndex = postorder.length - 1;
+        for (int i = 0; i < inorder.length; i++) {
+            inOrderMap.put(inorder[i], i);
         }
-        return helper(postOrder, 0, inOrder.length - 1);
+        return helper(postorder, 0, inorder.length - 1);
     }
-    private TreeNode helper(int[] postOrder, int leftIO, int rightIO) {
-        // base csae
+    private TreeNode helper(int[] postorder, int leftIO, int rightIO) {
         if (leftIO > rightIO) {
             return null;
         }
-        int rootValue = postOrder[postOrderIndex--];
-        TreeNode root = new TreeNode(rootValue);
-        root.right = helper(postOrder,inOrderMap.get(rootValue) + 1, rightIO);
-        root.left = helper(postOrder, leftIO, inOrderMap.get(rootValue) - 1);
+        int rootVal = postorder[postOrderIndex--];
+        TreeNode root = new TreeNode(rootVal);
+        root.right = helper(postorder, inOrderMap.get(rootVal) + 1, rightIO);
+        root.left = helper(postorder, leftIO, inOrderMap.get(rootVal) - 1);
         return root;
     }
     public static void main(String[] args) {
         ReconstructBinaryTreeWithPostorderAndInorder sol = new ReconstructBinaryTreeWithPostorderAndInorder();
-        sol.reconstruct(new int[]{1, 3, 4, 5, 8, 11}, new int[]{1, 4, 3, 11, 8, 5});
+        sol.buildTree(new int[]{1, 3, 4, 5, 8, 11}, new int[]{1, 4, 3, 11, 8, 5});
     }
 }
 /**

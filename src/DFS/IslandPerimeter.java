@@ -1,28 +1,35 @@
 package DFS;
 
 public class IslandPerimeter {
+    int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     public int islandPerimeter(int[][] grid) {
-        int ROWS = grid.length;
-        int COLS = grid[0].length;
-        int sum = 0;
-        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLS; j++) {
+        int res = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == 1) {
-                    int count = 0;
-                    for (int[] dir : dirs) {
-                        int x = i + dir[0];
-                        int y = j + dir[1];
-                        if (x >= 0 && x < ROWS && y >= 0 && y < COLS) {
-                            count += grid[x][y];
-                        }
-                    }
-                    count = 4 - count;
-                    sum += count;
+                    int count = 4 - dfs(grid, i, j);
+                    res += count;
                 }
             }
         }
-        return sum;
+        return res;
+    }
+    private int dfs(int[][] grid, int i, int j) {
+        int count = 0;
+        for (int[] dir : dirs) {
+            int x = dir[0] + i;
+            int y = dir[1] + j;
+            if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length
+                    && grid[i][j] == 1) {
+                count++;
+            }
+        }
+        return count;
     }
 
+    public static void main(String[] args) {
+        IslandPerimeter sol = new IslandPerimeter();
+        int[][] grid = {{0,1,0,0},{1,1,1,0},{0,1,0,0},{1,1,0,0}};
+        System.out.println(sol.islandPerimeter(grid));
+    }
 }

@@ -3,48 +3,37 @@ package Sorting;
 import java.util.Arrays;
 
 public class CountingSort {
-    public int[] sortArray(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return nums;
-        }
-        int[] res = new int[nums.length];
-        int max = getMaxValue(nums);
-        int min = getMinValue(nums);
+    public int[] sortArray(int[] array, int k) {
+        int min = getMin(array);
+        int max = getMax(array);
         int[] helper = new int[max - min + 1];
-        for (int num : nums) {
-            helper[num - min]++; // offset
+        for (int i = 0; i < array.length; i++) {
+            int index = array[i] - min;
+            helper[index]++;
         }
-        // counting sort
-        int sortedIndex = 0; // to traverse input array
-        for (int j = 0; j < helper.length; j++) {
-            while (helper[j] > 0) {
-                res[sortedIndex++] = j + min; // undo offset
-                helper[j]--;
+        int index = 0;
+        int j = 0;
+        while (j < helper.length) {
+            if (helper[j]-- > 0) {
+                array[index++] = j + min;
+            } else {
+                j++;
             }
         }
-        /**
-         index i  0  1  2 ...
-         input[i] v2 v3 v1 ...
-
-         index j  v1 v2 v3 ...
-         helper[j] c1 c2 c3
-         */
-        return res;
+        return array;
     }
-
-    private int getMinValue(int[] nums) {
+    private int getMin(int[] array) {
         int min = Integer.MAX_VALUE;
-        for (int num : nums) {
+        for (int num : array) {
             if (num < min) {
                 min = num;
             }
         }
         return min;
     }
-
-    private int getMaxValue(int[] nums) {
+    private int getMax(int[] array) {
         int max = Integer.MIN_VALUE;
-        for (int num : nums) {
+        for (int num : array) {
             if (num > max) {
                 max = num;
             }
@@ -54,8 +43,10 @@ public class CountingSort {
 
     public static void main(String[] args) throws Exception {
         CountingSort sol = new CountingSort();
-        System.out.println(Arrays.toString(sol.sortArray(new int[]{-1, 5, 2, 3, 1})));
-        System.out.println(Arrays.toString(sol.sortArray(new int[]{5, 2, 3, 1})));
+//        System.out.println(Arrays.toString(sol.sortArray(new int[]{-1, 5, 2, 3, 1}, 5)));
+//        System.out.println(Arrays.toString(sol.sortArray(new int[]{5, 2, 3, 1}, 4)));
+        System.out.println(Arrays.toString(sol.sortArray(new int[]{1,3,4,2,5,2,1}, 5)));
+
     }
 }
 

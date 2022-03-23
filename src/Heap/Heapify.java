@@ -9,27 +9,33 @@ public class Heapify {
             return array;
         }
         for (int i = array.length / 2 - 1; i >= 0; i--) {
-            percolateDown(array, i);
+            percolateDown(array, i, array.length);
         }
+/*** Note: we cannot heapify from top down. test case: [4, 1, 2, 8, 5, 3]
+ * heapify the array to make it a max heap
+ * 1st round: {[4], 1, 2} => 4 is max
+ * 2nd round: 4, {[1], 2, 8, 5} => 4 < 8, but 8 will never have a chance to move to top
+*/
+//        for (int i = 0; i < array.length; i++) {
+//            percolateDown(array, i, array.length);
+//        }
         return array;
     }
 
-    private void percolateDown(int[] array, int index) {
-        int n = array.length;
-        while (index <= n / 2 - 1) { // traverse all the parent nodes
-            int leftChild = index * 2 + 1;
-            int rightChild = index * 2 + 2;
-            int smallCandidate = leftChild;
-            if (rightChild < n && array[rightChild] < array[smallCandidate]) {
-                smallCandidate = rightChild;
+    private void percolateDown(int[] array, int index, int n) {
+        while (index <= n / 2 - 1) {
+            int leftChildIndex = index * 2 + 1;
+            int rightChildIndex = index * 2 + 2;
+            int largerChildIndex = leftChildIndex;
+            if (rightChildIndex <= n - 1 && array[rightChildIndex] > array[largerChildIndex]) {
+                largerChildIndex = rightChildIndex;
             }
-            if (array[smallCandidate] < array[index]) {
-                swap(array, index, smallCandidate);
+            if (array[largerChildIndex] > array[index]) {
+                swap(array, largerChildIndex, index);
             } else {
-                break; // jump out of the while loop
+                break;
             }
-//            index++;
-            index = smallCandidate; // ??
+            index = largerChildIndex;
         }
     }
 
@@ -42,7 +48,7 @@ public class Heapify {
     public static void main(String[] args) {
         Heapify sol = new Heapify();
 //        System.out.println(Arrays.toString(sol.heapify(new int[]{3, 1, 2})));
-        System.out.println(Arrays.toString(sol.heapify(new int[]{66, 0, 5, 84, 29})));
+        System.out.println(Arrays.toString(sol.heapify(new int[]{4,1, 2, 8, 5, 3})));
 
     }
 }
