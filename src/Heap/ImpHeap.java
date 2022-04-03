@@ -1,5 +1,6 @@
 package Heap;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class ImpHeap {
@@ -20,7 +21,6 @@ public class ImpHeap {
 
     private void heapify() { // 最后一个parent元素的index = size / 2 - 1
         for (int i = size / 2 - 1; i >= 0; i--) {
-            // percolateDown(array[i]);
             percolateDown(i);
         }
     }
@@ -61,7 +61,6 @@ public class ImpHeap {
     private void percolateDown(int index) {
         // 左孩子一定存在，右孩子不一定存在, 所以smallestCandidate 默认是leftChild
         while (index <= size / 2 - 1) { // 从 last parent index 开始percolateDown
-            int parent = (index - 1) / 2;
             // Find the smallest node between the children
             int leftChild = index * 2 + 1; // index 就是 parent
             int rightChild = index * 2 + 2;
@@ -81,39 +80,34 @@ public class ImpHeap {
 
 
     public int peek() {
-        if (array == null || array.length == 0) {
-            return -1;
-        }
-        return array[0];
+        return isEmpty() ? -1 : array[0];
     }
 
     public int poll() {
-        if (array == null || array.length == 0) {
+        if (isEmpty()) {
             return -1;
         }
-        int result = array[0];
-        swap(0, size - 1); // swap the first node and the last node
+        int res = array[0];
         array[0] = array[size - 1]; // 减少写操作
         size--; // 必须先调整到一个合法的状态，再percolateDown
         percolateDown(0);
-        size--;
-        return result;
+        return res;
     }
 
 
     public void offer(int ele) {
         // If heap reaches the last index of an array, then resize
-        if (size == array.length) {
+        if (isFull()) {
             resize();
         }
         array[size] = ele;
-        size++; // 将size调整为合法状态后，在percolateUp
+        size++; // 将size调整为合法状态后，再percolateUp
         percolateUp(size - 1);
     }
 
     private void resize() {
-//        array = Arrays .copyOf(array, array.length * 1.5);
-
+        int newSize = (int)(size * 1.5);
+        array = Arrays.copyOf(array, newSize);
 /**        // overflow-conscious code
  获取原来数组容量的长度
  int oldCapacity = elementData.length;
