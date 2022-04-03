@@ -1,52 +1,40 @@
 package BinaryTree;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 import static BinaryTree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
 
-/*
- Example: expected: {1 3 4 2 11 8 5}
+/**
                 5
               /    \
-            2        8
-          /   \        \
-         1     4        11
-              /
-             3                     */
+            2        8 */
 public class PostOrder {
-    public static List<Integer> postOrder(TreeNode root) {
+    public List<Integer> postOrder(TreeNode root) {
         List<Integer> res = new ArrayList<>();
+        Set<TreeNode> visited = new HashSet<>();
         Deque<TreeNode> stack = new ArrayDeque<>();
         stack.offerFirst(root);
-        TreeNode prev = null;
+        TreeNode cur = root;
         while (!stack.isEmpty()) {
-            TreeNode cur = stack.peekFirst();
-            if (prev == null || cur == prev.left || cur == prev.right) {
-                if (cur.left != null) {
-                    stack.offerFirst(cur.left);
-                } else if (cur.right != null) {
-                    stack.offerFirst(cur.right);
-                } else {
-                    stack.pollFirst();
-                    res.add(cur.val);
-                }
-            } else if (prev == cur.right || prev == cur.left && cur.right == null) {
-                stack.pollFirst();
-                res.add(cur.val);
+            if (cur != null) {
+                stack.offerFirst(cur);
+                cur = cur.left;
             } else {
-                stack.offerFirst(cur.right);
+                TreeNode parent = stack.peekFirst();
+                if (!visited.contains(parent)) {
+                    visited.add(parent);
+                    cur = parent.right;
+                } else {
+                    res.add(parent.key);
+                    stack.pollFirst();
+                }
             }
-            prev = cur;
         }
-
         return res;
     }
 
     public static void main(String[] args) {
-    /*
+    /**
      Example: expected: {1 3 4 2 11 8 5}
                     5
                   /    \
@@ -56,9 +44,11 @@ public class PostOrder {
                   /
                  3
     */
-        String[] input = {"5", "2", "8", "1", "4", "#", "11", "#", "#", "3"};
+//        String[] input = {"5", "2", "8", "1", "4", "#", "11", "#", "#", "3"};
+        String[] input = {"5", "2", "8"};
         TreeNode root = reconstructBT(input);
-        System.out.println(postOrder(root));
+        PostOrder sol = new PostOrder();
+        System.out.println(sol.postOrder(root));
 
     }
 }

@@ -2,24 +2,33 @@ package BinaryTree;
 
 public class ReconstructBSTfromLevelOrder {
     public TreeNode reconstruct(int[] level) {
-        // Write your solution here
-        TreeNode root = null;
-        for (int i = 0; i < level.length; i++) {
-            root = helper(root, level[i]);
+        if (level == null || level.length == 0) {
+            return null;
+        }
+        return reconstruct(level, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    private TreeNode reconstruct(int[] level, int index, int lowerBound, int upperBound) {
+        TreeNode root = new TreeNode(level[index]);
+        for (int i = index + 1; i < level.length; i++) {
+            if (level[i] < root.key && root.left == null && level[i] > lowerBound) {
+                root.left = reconstruct(level, i, lowerBound, root.key);
+            }
+            if (level[i] > root.key && root.right == null && level[i] < upperBound) {
+                root.right = reconstruct(level, i, root.key, upperBound);
+            }
         }
         return root;
     }
-
-    private TreeNode helper(TreeNode root, int data) {
-        if (root == null) {
-            return new TreeNode(data);
-        }
-        if (data <= root.val) {
-            root.left = helper(root.left, data);
-        }
-        if (data > root.val) {
-            root.right = helper(root.right, data);
-        }
-        return root;
+    /**
+     *             5
+     *          /    \
+     *         2
+     *       /   \
+     *      1     3
+     * 
+     */
+    public static void main(String[] args) {
+        ReconstructBSTfromLevelOrder sol = new ReconstructBSTfromLevelOrder();
+        System.out.println(sol.reconstruct(new int[]{5,2,1,3}));
     }
 }

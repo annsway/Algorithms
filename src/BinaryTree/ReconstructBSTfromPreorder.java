@@ -1,17 +1,17 @@
 package BinaryTree;
 
 public class ReconstructBSTfromPreorder {
-    int i = 0;
-    public TreeNode reconstruct(int[] A) {
-        return helper(A, Integer.MAX_VALUE);
+    int index = 0;
+    public TreeNode reconstruct(int[] pre) {
+        return helper(pre, Integer.MAX_VALUE);
     }
-    public TreeNode helper(int[] A, int bound) {
-        if (i == A.length || A[i] > bound) {
+    private TreeNode helper(int[] pre, int upperBound) {
+        if (index == pre.length || pre[index] > upperBound) {
             return null;
         }
-        TreeNode root = new TreeNode(A[i++]);
-        root.left = helper(A, root.val);
-        root.right = helper(A, bound);
+        TreeNode root = new TreeNode(pre[index++]);
+        root.left = helper(pre, root.val);
+        root.right = helper(pre, upperBound);
         return root;
     }
     /**
