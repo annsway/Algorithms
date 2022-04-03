@@ -56,5 +56,7 @@ public class Trie {
     public static void main(String[] args) {
         Trie trie = new Trie();
         trie.insert("apple");
+        trie.insert("bob");
+        System.out.println("test...");
     }
 }
