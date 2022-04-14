@@ -36,7 +36,34 @@ public class Bipartite {
         return true;
     }
 
+    public boolean isBipartite2(List<GraphNode> graph) {
+        // 0 = uncolored; 1 = red; 2 = green
+        HashMap<GraphNode, Integer> colors = new HashMap<>();
+        // record the neighboring nodes,
+        // of which the color must be different than the color of the current node
+        Queue<GraphNode> q = new ArrayDeque<>();
+        q.offer(graph.get(0));
+        colors.put(graph.get(0), 1);
+        int visited = 0;
+        while (!q.isEmpty()) {
+            GraphNode cur = q.poll();
+            int color = colors.get(cur);
+            visited++;
+            for (GraphNode nei : cur.neighbors) {
+                if (!colors.containsKey(nei)) {
+                    int neiColor = color == 1 ? 2 : 1;
+                    colors.put(nei, neiColor);
+                } else if (colors.get(nei) == color) {
+                    return false;
+                }
+                q.offer(nei);
+            }
+        }
+        return visited == graph.size();
+    }
+
     public static void main(String[] args) {
+        Bipartite sol = new Bipartite();
         /**
          input:
          {0->1;
@@ -61,7 +88,7 @@ public class Bipartite {
         graph.add(n2);
         graph.add(n3);
 
-        System.out.println(isBipartite(graph));
+        System.out.println(sol.isBipartite(graph));
 
     }
 

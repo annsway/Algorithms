@@ -47,9 +47,9 @@
 //        System.out.println(strStr("abcdefghijklmnopqrstuvwxyzzabcdefghijklmnopqrstu", "qrstuvwxyzzabcdefghijklmnopqrstu")); // expected: 0
 //    }
 //}
-
-
-
+//
+//
+//
 //    public static int strStr(String large, String small) {
 //        int patternSize = small.length();
 //        // sanity check
@@ -65,7 +65,7 @@
 //        }
 //        return -1;
 //    }
-
+//
 //    private static int hash(String small) {
 //        int result = 0;
 //        for (int i = 0; i < small.length(); i++) {
@@ -73,7 +73,7 @@
 //        }
 //        return result;
 //    }
-
+//
 //    private static int hash(String s) {
 //        return s.hashCode();
 //    }

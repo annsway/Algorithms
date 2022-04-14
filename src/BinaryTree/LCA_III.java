@@ -3,35 +3,27 @@ package BinaryTree;
 import static BinaryTree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
 
 public class LCA_III {
-    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode one, TreeNode two) {
-        // write your solution here
-        boolean[] seen = new boolean[2];
-        TreeNode candidate = lca(root, one, two, seen);
-        if (seen[0] == true && seen[1] == true) {
-            return candidate;
-        }
-        return null;
+    boolean pFound = false;
+    boolean qFound = false;
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode LCA = LCA(root, p, q);
+        return pFound && qFound ? LCA : null;
     }
-    public static TreeNode lca(TreeNode root, TreeNode one, TreeNode two, boolean[] seen) {
-        // Write your solution here.
-        if (root == null) {
-            return null;
-        }
-        TreeNode left = lca(root.left, one, two, seen);
-        TreeNode right = lca(root.right, one, two, seen);
-        if (root == one || root == two) {
-            if (root == one) {
-                seen[0] = true;
-            } else {
-                seen[1] = true;
-            }
+
+    public TreeNode LCA(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return root;
+        TreeNode left = LCA(root.left, p, q);
+        TreeNode right = LCA(root.right, p, q);
+        if (root == p) {
+            pFound = true;
             return root;
         }
-        if (left != null && right != null) {
+        if (root == q) {
+            qFound = true;
             return root;
-        } else {
-            return left == null ? right : left;
         }
+        return left == null ? right : right == null ? left : root;
     }
 
     /**
@@ -42,10 +34,11 @@ public class LCA_III {
      * 9     -6     -4
      */
     public static void main(String[] args) {
+        LCA_III sol = new LCA_III();
         // Create a binary search tree
         String[] array = {"-5", "-2", "-1", "9", "#", "-6", "-4"};
         TreeNode root = reconstructBT(array);
         // test
-        System.out.println(lowestCommonAncestor(root, root.left, root.left.left).val);
+        System.out.println(sol.lowestCommonAncestor(root, root.left, root.left.left).val);
     }
 }
