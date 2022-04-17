@@ -1,4 +1,4 @@
-package Stack;
+package String;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
