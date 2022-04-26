@@ -1,4 +1,4 @@
-package Hash;
+package OOD;
 
 import java.util.Arrays;
 
@@ -20,7 +20,7 @@ import java.util.Arrays;
  * int param_2 = obj.get(key);
  * obj.remove(key);
  */
-public class MyHashMap<K, V> {
+public class MyHashMapAns<K, V> {
 
     public static class Node<K, V> {
         K key;
@@ -42,11 +42,11 @@ public class MyHashMap<K, V> {
     private int size;
     private final float loadFactor;
 
-    public MyHashMap() {
+    public MyHashMapAns() {
         // if user did not enter capacity or loadFactor, use default
         this(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR); // 调用有参constructor
     }
-    public MyHashMap(int capacity, float loadFactor) {
+    public MyHashMapAns(int capacity, float loadFactor) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("The capacity of HashMap cannot be negative!");
         }
@@ -191,13 +191,16 @@ public class MyHashMap<K, V> {
                     prev.next = cur.next;
                 }
                 size--;
-                cur.next = null;
                 return cur.value;
             }
             prev = cur;
             cur = cur.next;
         }
         return null; // cannot find the node to be removed
+    }
+
+    public int getSize() {
+        return this.size;
     }
 }
 
@@ -219,7 +222,7 @@ class Test {
 //        System.out.println("ab hash code is " + MyHashMap.hash("ab"));
 //        System.out.println("ac hash code is " + MyHashMap.hash("ac"));
 
-        MyHashMap<String, Integer> map2 = new MyHashMap<>();
+        MyHashMapAns<String, Integer> map2 = new MyHashMapAns<>();
         map2.put("ab", 1); // 1
         map2.put("ac", 2); // 2
         map2.put("ab1", 1); // 3
@@ -250,8 +253,8 @@ class Test {
 //        MyHashMap<Integer, Integer> map3 = new MyHashMap<>(-1, 0.75f);
 /**
  * Exception in thread "main" java.lang.IllegalArgumentException: The capacity of HashMap cannot be negative!
- * 	at HashMap.MyHashMap.<init>(MyHashMap.java:39)
- * 	at HashMap.Test.main(MyHashMap.java:210)
+ * 	at HashMap.MyHashMap.<init>(MyHashMapAns.java:39)
+ * 	at HashMap.Test.main(MyHashMapAns.java:210)
  * */
     }
 
