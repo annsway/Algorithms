@@ -36,7 +36,7 @@ public class LongestAscendingSubsequence {
 
     public static void main(String[] args) {
         LongestAscendingSubsequence sol = new LongestAscendingSubsequence();
-//        System.out.println(sol.longest(new int[]{5, 2, 6, 3, 4, 7, 5})); // expected: 4;  [2, 3, 4, 5]
-        System.out.println(sol.longest(new int[]{5, 2, -6, -3, 4, -7, 5})); // expected: 4; [-6,-3,4,5]
+        System.out.println(sol.longest(new int[]{5, 2, 6, 3, 4, 7, 5})); // expected: 4;  [2, 3, 4, 5]
+//        System.out.println(sol.longest(new int[]{5, 2, -6, -3, 4, -7, 5})); // expected: 4; [-6,-3,4,5]
     }
 }

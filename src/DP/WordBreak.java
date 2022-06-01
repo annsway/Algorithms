@@ -37,7 +37,7 @@ public class WordBreak {
         String s = "leetcode";
         List<String> wordDict = new ArrayList<>();
         wordDict.add("leet");
-        wordDict.add("cod");
+        wordDict.add("code");
         WordBreak sol = new WordBreak();
         System.out.println(sol.wordBreak(s, wordDict));
     }
