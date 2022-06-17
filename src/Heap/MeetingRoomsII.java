@@ -1,19 +1,27 @@
 package Heap;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class MeetingRoomsII {
     public int minMeetingRooms(int[][] intervals) {
-        Arrays.sort(intervals, (o1, o2) -> o1[0] == o2[0] ? 0 : o1[0] < o2[0] ? -1 : 1);
-        int count = 1;
-        for (int i = 1; i < intervals.length; i++) {
-            int prevEnd = intervals[i - 1][1];
-            int curStart = intervals[i][0];
-            if (prevEnd > curStart) {
-                count++;
+        // sort the meetings by start time
+        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0] < 0 ? -1 : 1);
+        // minHeap stores the end time of a meeting
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int[] interval : intervals) {
+            int startTime = interval[0];
+            int endTime = interval[1];
+            if (minHeap.isEmpty()) {
+                minHeap.offer(endTime);
+            } else {
+                if (minHeap.peek() <= startTime) {
+                    minHeap.poll();
+                }
+                minHeap.offer(endTime);
             }
         }
-        return count;
+        return minHeap.size();
     }
 
     public static void main(String[] args) {

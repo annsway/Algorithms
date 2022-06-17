@@ -3,48 +3,37 @@ package Heap;
 import java.util.*;
 
 public class TopKFrequentWords {
-    public String[] topKFrequent(String[] combo, int k) {
-        // Hash + Heap
+    public List<String> topKFrequent(String[] words, int k) {
         Map<String, Integer> countMap = new HashMap<>();
-        for (String s : combo) {
-            Integer oldValue = countMap.get(s);
-            if (oldValue == null) {
-                countMap.put(s, 1);
-            } else {
-                countMap.put(s, ++oldValue);
-            }
+        for (String word : words) {
+            countMap.put(word, countMap.getOrDefault(word, 0) + 1);
         }
-//        PriorityQueue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<>(k, new Comparator<Map.Entry<String, Integer>>() {
-//            @Override
-//            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-//                if (o1.equals(o2)) {
-//                    return 0;
-//                }
-//                return o1.getValue() < o2.getValue() ? -1 : 1;
-//            }
-//        });
-        // Use lambda expression to implement PQ
-        PriorityQueue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<>(
-                (o1, o2) -> o1.getValue() < o2.getValue()  ? -1 : o1.getValue() > o2.getValue() ? 1 : 0);
+
+        Queue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<>(
+                (o1, o2) -> o1.getValue() - o2.getValue());
 
         for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
-            if (minHeap.size() < k) {
+            if (minHeap.isEmpty() || minHeap.size() < k) {
                 minHeap.offer(entry);
-            } else if (minHeap.peek().getValue() < entry.getValue()) {
+            } else if (entry.getValue() > minHeap.peek().getValue()) {
                 minHeap.poll();
                 minHeap.offer(entry);
             }
         }
-        String[] res = new String[minHeap.size()];
-        for (int i = res.length - 1; i >= 0; i--) {
-            res[i] = minHeap.poll().getKey();
+        String[] array = new String[minHeap.size()];
+        int index = array.length - 1;
+
+        while (!minHeap.isEmpty()) {
+            array[index--] = minHeap.poll().getKey();
         }
-        return res;
+
+        return Arrays.asList(array);
     }
 
     public static void main(String[] args) {
         TopKFrequentWords sol = new TopKFrequentWords();
-        System.out.println(Arrays.toString(sol.topKFrequent(new String[]{"d", "a", "c", "b", "d", "a", "b", "b", "a", "d", "d", "a", "d"}, 4)));
+        String[] input = {"i","love","leetcode","i","love","coding"};
+        System.out.println(sol.topKFrequent(input, 1));
         // Expected: [["d", "a", "b", "c"]]
     }
 }
