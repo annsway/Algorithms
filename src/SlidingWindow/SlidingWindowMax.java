@@ -3,7 +3,7 @@ package SlidingWindow;
 import java.util.*;
 
 public class SlidingWindowMax {
-    public List<Integer> maxSlidingWindow(int[] array, int k) {
+    public List<Integer> maxWindows(int[] array, int k) {
         List<Integer> max = new ArrayList<>();
         Deque<Integer> deque = new ArrayDeque<>();
         for (int i = 0; i < array.length; i++) {
@@ -23,7 +23,7 @@ public class SlidingWindowMax {
     }
     public static void main(String[] args) {
         SlidingWindowMax sol = new SlidingWindowMax();
-        int[] input = {4, 4, 2, 3, 0, 5}; // k = 3
+//        int[] input = {4, 4, 2, 3, 0, 5}; // k = 3
 /**                             i
  * {4a}
  * {4b}
@@ -32,6 +32,7 @@ public class SlidingWindowMax {
  * {4b,3}
  * {}
  */
-        System.out.println(sol.maxSlidingWindow(input, 3));
+        int[] input = {2,1,3,6,2,3,2,4,1,5,2,7,6,8,1,4};
+        System.out.println(sol.maxWindows(input, 3));
     }
 }
