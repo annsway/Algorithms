@@ -5,28 +5,27 @@ import java.util.PriorityQueue;
 
 public class KclosestPointsToOrigin {
     public int[][] kClosest(int[][] points, int k) {
-        PriorityQueue<Cell> maxHeap = new PriorityQueue<>(k);
+        PriorityQueue<Cell> maxHeap = new PriorityQueue<>(k, (o1, o2) -> o2.dist == o1.dist ? 0 :
+                o2.dist - o1.dist < 0 ? -1 : 1);
         for (int[] point : points) {
-            Cell cell = new Cell(point[0], point[1]);
-            if (maxHeap.size() < k) {
-                maxHeap.offer(cell);
-            } else {
-                if (maxHeap.peek().dist > cell.dist) {
-                    maxHeap.poll();
-                    maxHeap.offer(cell);
-                }
+            Cell cur = new Cell(point[0], point[1]);
+            if (!maxHeap.isEmpty() && maxHeap.size() == k && maxHeap.peek().dist > cur.dist) {
+                maxHeap.poll();
             }
+            maxHeap.offer(cur);
         }
         int[][] res = new int[k][2];
-        for (int i = 0; i < k; i++) {
-            Cell cell = maxHeap.poll();
-            res[i][0] = cell.x;
-            res[i][1] = cell.y;
+        int index = 0;
+        while (!maxHeap.isEmpty()) {
+            Cell cur = maxHeap.poll();
+            res[index][0] = cur.x;
+            res[index][1] = cur.y;
+            index++;
         }
         return res;
     }
 
-    static class Cell implements Comparable<Cell> {
+    static class Cell {
         int x;
         int y;
         double dist;
@@ -34,15 +33,7 @@ public class KclosestPointsToOrigin {
         public Cell(int x, int y) {
             this.x = x;
             this.y = y;
-            this.dist = Math.sqrt(x * x + y * y);
-        }
-
-        @Override
-        public int compareTo(Cell o2) {
-            if (this.dist == o2.dist) {
-                return 0;
-            }
-            return this.dist > o2.dist ? -1 : 1;
+            this.dist = Math.sqrt(x*x + y*y);
         }
     }
 
