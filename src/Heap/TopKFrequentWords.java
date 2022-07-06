@@ -3,21 +3,21 @@ package Heap;
 import java.util.*;
 
 public class TopKFrequentWords {
-    public List<String> topKFrequent(String[] words, int k) {
+    public List<String> topKFrequent(List<String> words, int k) {
         Map<String, Integer> countMap = new HashMap<>();
         for (String word : words) {
             countMap.put(word, countMap.getOrDefault(word, 0) + 1);
         }
 
-        Queue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<>(
-                (o1, o2) -> o1.getValue() - o2.getValue());
+        PriorityQueue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<>(
+                (o1, o2) -> o1.getValue().equals(o2.getValue()) ?
+                        o2.getKey().compareTo(o1.getKey()) :
+                        o1.getValue() - o2.getValue());
 
         for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
-            if (minHeap.isEmpty() || minHeap.size() < k) {
-                minHeap.offer(entry);
-            } else if (entry.getValue() > minHeap.peek().getValue()) {
+            minHeap.offer(entry);
+            if (minHeap.size() > k) {
                 minHeap.poll();
-                minHeap.offer(entry);
             }
         }
         String[] array = new String[minHeap.size()];
@@ -32,8 +32,32 @@ public class TopKFrequentWords {
 
     public static void main(String[] args) {
         TopKFrequentWords sol = new TopKFrequentWords();
-        String[] input = {"i","love","leetcode","i","love","coding"};
-        System.out.println(sol.topKFrequent(input, 1));
-        // Expected: [["d", "a", "b", "c"]]
+        String s = "Jimmy has an apple, it is on the table, he like it";
+        String[] excludeWords = {"a", "an", "the"};
+        List<String> words = sol.tokenize(s, excludeWords);
+        System.out.println(sol.topKFrequent(words, 1));
+    }
+/*** Example
+    Input: s = “Jimmy has an apple, it is on the table, he like it”
+    excludeWords = [“a”,“an”,“the”]
+    Output:“it”     */
+    private List<String> tokenize(String s, String[] exclude) {
+        List<String> list = new ArrayList<>();
+        Set<String> set = new HashSet<>(Arrays.asList(exclude));
+
+        int slow = 0, fast = 0;
+
+        while (slow < s.length()) {
+            while (fast < s.length() && Character.isLetter(s.charAt(fast))) {
+                fast++;
+            }
+            String str = s.substring(slow, fast);
+            if (!"".equals(str) && !set.contains(str)) {
+                list.add(str);
+            }
+            fast++;
+            slow = fast;
+        }
+        return list;
     }
 }

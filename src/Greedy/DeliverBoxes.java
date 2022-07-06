@@ -33,12 +33,11 @@ public class DeliverBoxes {
 
         }
         return min;
-
     }
     public static void main(String[] args) {
 //        int[] boxes = {2, 2, 3, 3, 2, 4, 4, 4, 4, 4}; // 4
 
-        int[] boxes = {2, 3, 3};
+        int[] boxes = {2, 2, 3}; // -1
         DeliverBoxes sol = new DeliverBoxes();
         System.out.println(sol.minRounds(boxes));
     }
