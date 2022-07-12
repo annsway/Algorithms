@@ -3,7 +3,7 @@ package SlidingWindow;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SubstringWithExactlyKdistinctChars {
+public class CountSubstringWithExactlyKdistinctChars {
     public int countAtLeastKDistinct(String s, int k) {
         int res = 0, left = 0;
         Map<Character, Integer> map = new HashMap<>();
@@ -26,7 +26,7 @@ public class SubstringWithExactlyKdistinctChars {
     }
 
     public static void main(String[] args) {
-        SubstringWithExactlyKdistinctChars sol = new SubstringWithExactlyKdistinctChars();
+        CountSubstringWithExactlyKdistinctChars sol = new CountSubstringWithExactlyKdistinctChars();
         String s = "pqpqs";
         System.out.println(sol.countSubstring(s, 2));
     }
