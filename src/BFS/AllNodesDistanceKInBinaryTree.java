@@ -1,10 +1,10 @@
 package BFS;
 
-import BinaryTree.TreeNode;
+import Tree.TreeNode;
 
 import java.util.*;
 
-import static BinaryTree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
+import static Tree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
 
 public class AllNodesDistanceKInBinaryTree {
 

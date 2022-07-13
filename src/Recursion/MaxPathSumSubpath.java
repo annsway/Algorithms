@@ -11,9 +11,9 @@ package Recursion;
  * }
  */
 
-import BinaryTree.TreeNode;
+import Tree.TreeNode;
 
-import static BinaryTree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
+import static Tree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
 
 /**
  1. What to report to parent node?

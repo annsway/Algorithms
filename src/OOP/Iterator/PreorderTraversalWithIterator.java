@@ -1,12 +1,12 @@
 package OOP.Iterator;
 
-import BinaryTree.TreeNode;
+import Tree.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
-import static BinaryTree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
+import static Tree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
 
 public class PreorderTraversalWithIterator implements Iterator<TreeNode> {
     Deque<TreeNode> stack;

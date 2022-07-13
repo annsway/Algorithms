@@ -1,11 +1,11 @@
 package DFS;
 
-import BinaryTree.TreeNode;
+import Tree.TreeNode;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static BinaryTree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
+import static Tree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
 
 public class BinaryTreePathSumToTargetSubpath {
 //    public static boolean exist(TreeNode root, int target) {

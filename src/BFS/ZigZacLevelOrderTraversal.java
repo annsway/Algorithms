@@ -1,13 +1,13 @@
 package BFS;
 
-import BinaryTree.TreeNode;
+import Tree.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-import static BinaryTree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
+import static Tree.CreateBinaryTreeUsingLevelOrder.reconstructBT;
 
 public class ZigZacLevelOrderTraversal {
     public List<Integer> zigZag(TreeNode root) {
