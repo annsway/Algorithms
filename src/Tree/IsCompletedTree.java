@@ -40,9 +40,9 @@ public class IsCompletedTree {
              /       \
             3         8
           /   \       /   \
-         2     null  null  9
+         2     null  4    9
          */
-        String[] input = {"5", "3", "8", "2", "#", "#", "9"};
+        String[] input = {"5", "3", "8", "2", "#", "4", "9"};
         TreeNode root = reconstructBT(input);
         System.out.println(isCompleted(root));
     }
