@@ -8,69 +8,50 @@ import java.util.List;
 import java.util.Map;
 
 public class MinWindowSubstring {
-    public String minWindow(String s, String t) {
-
-        if (s.length() == 0 || t.length() == 0) {
+    public String minWindow(String source, String target) {
+        if (source.length() == 0 || target.length() == 0 || source.length() < target.length()) {
             return "";
         }
-
-        Map<Character, Integer> dictT = new HashMap<Character, Integer>();
-
-        for (int i = 0; i < t.length(); i++) {
-            int count = dictT.getOrDefault(t.charAt(i), 0);
-            dictT.put(t.charAt(i), count + 1);
+        int m = target.length(), n = source.length();
+        // targetCounter stores the count of each char in target
+        Map<Character, Integer> targetCounter = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            char key = target.charAt(i);
+            targetCounter.put(key, targetCounter.getOrDefault(key, 0) + 1);
         }
+        // subCounter stores the count of each char in the current substring
+        Map<Character, Integer> subCounter = new HashMap<>();
+        int matchedChar = 0;
+        int j = 0;
 
-        int required = dictT.size();
+        // save the output
+        int start = 0, minLen = Integer.MAX_VALUE;
 
-        // Filter all the characters from s into a new list along with their index.
-        // The filtering criteria is that the character should be present in t.
-        List<Pair<Integer, Character>> filteredS = new ArrayList<Pair<Integer, Character>>();
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (dictT.containsKey(c)) {
-                filteredS.add(new Pair<Integer, Character>(i, c));
-            }
-        }
-
-        int l = 0, r = 0, formed = 0;
-        Map<Character, Integer> windowCounts = new HashMap<Character, Integer>();
-        int[] ans = {-1, 0, 0};
-
-        // Look for the characters only in the filtered list instead of entire s.
-        // This helps to reduce our search.
-        // Hence, we follow the sliding window approach on as small list.
-        while (r < filteredS.size()) {
-            char c = filteredS.get(r).getValue();
-            int count = windowCounts.getOrDefault(c, 0);
-            windowCounts.put(c, count + 1);
-
-            if (dictT.containsKey(c) && windowCounts.get(c).intValue() == dictT.get(c).intValue()) {
-                formed++;
-            }
-
-            // Try and contract the window till the point where it ceases to be 'desirable'.
-            while (l <= r && formed == required) {
-                c = filteredS.get(l).getValue();
-
-                // Save the smallest window until now.
-                int end = filteredS.get(r).getKey();
-                int start = filteredS.get(l).getKey();
-                if (ans[0] == -1 || end - start + 1 < ans[0]) {
-                    ans[0] = end - start + 1;
-                    ans[1] = start;
-                    ans[2] = end;
+        for (int i = 0; i < n; i++) {
+            while (j < n && matchedChar < targetCounter.size()) {
+                char c = source.charAt(j);
+                subCounter.put(c, subCounter.getOrDefault(c, 0) + 1);
+                if (subCounter.get(c).equals(targetCounter.get(c))) {
+                    matchedChar++; // increment matchedChar only if the char counts are *equal*
                 }
-
-                windowCounts.put(c, windowCounts.get(c) - 1);
-                if (dictT.containsKey(c) && windowCounts.get(c).intValue() < dictT.get(c).intValue()) {
-                    formed--;
-                }
-                l++;
+                j++;
             }
-            r++;
+            if (matchedChar == targetCounter.size()) {
+                int curLen = (j - 1) - i + 1;
+                // update len only if encountered a shorter substring
+                if (minLen > curLen) {
+                    minLen = curLen;
+                    start = i;
+                }
+            }
+            // remove the start of the window
+            char sc = source.charAt(i);
+            subCounter.put(sc, subCounter.getOrDefault(sc, 0) - 1);
+            if (subCounter.get(sc).equals(targetCounter.getOrDefault(sc, 0) - 1)) {
+                matchedChar--;
+            }
         }
-        return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
+        return minLen == Integer.MAX_VALUE ? "" : source.substring(start, start + minLen);
     }
 
     public static void main(String[] args) {

@@ -35,17 +35,17 @@ public class SubtreeWithMaxAverage {
 
     public static void main(String[] args) {
         SubtreeWithMaxAverage sol = new SubtreeWithMaxAverage();
-        TreeNodeN root = new TreeNodeN(20);
+        TreeNodeN root = new TreeNodeN(200);
 
-        TreeNodeN node12 = new TreeNodeN(12);
-        TreeNodeN node18 = new TreeNodeN(18);
+        TreeNodeN node12 = new TreeNodeN(120);
+        TreeNodeN node18 = new TreeNodeN(180);
 
-        TreeNodeN node11 = new TreeNodeN(11);
-        TreeNodeN node2 = new TreeNodeN(2);
-        TreeNodeN node3 = new TreeNodeN(3);
+        TreeNodeN node11 = new TreeNodeN(110);
+        TreeNodeN node2 = new TreeNodeN(20);
+        TreeNodeN node3 = new TreeNodeN(30);
 
-        TreeNodeN node15 = new TreeNodeN(15);
-        TreeNodeN node8 = new TreeNodeN(8);
+        TreeNodeN node15 = new TreeNodeN(150);
+        TreeNodeN node8 = new TreeNodeN(80);
 
         root.children.add(node12);
         root.children.add(node18);

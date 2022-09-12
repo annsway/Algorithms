@@ -27,9 +27,11 @@ public class LongestPalindromicString {
             for(int i = j; i >= 0; i--) {
                 if (i == j) {
                     dp[i][j] = true;
-                } else if (i == j - 1) {
+                }
+                else if (i == j - 1) {
                     dp[i][j] = input.charAt(i) == input.charAt(j);
-                } else {
+                }
+                else {
                     dp[i][j] = dp[i + 1][j - 1] && (input.charAt(i) == input.charAt(j));
                 }
                 if (dp[i][j] && j + 1 - i > globalMax) {
@@ -43,6 +45,6 @@ public class LongestPalindromicString {
 
     public static void main(String[] args) {
         LongestPalindromicString sol = new LongestPalindromicString();
-        System.out.println(sol.longestPalindrome("abbc"));
+        System.out.println(sol.longestPalindrome("abbc")); // expected: "bb"
     }
 }
