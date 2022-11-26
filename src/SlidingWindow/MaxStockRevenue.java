@@ -1,7 +1,31 @@
 package SlidingWindow;
 
 public class MaxStockRevenue {
-    public static int maxStockRevenue(int[] prices, int[] algo, int k) {
+    public static int maxStockRevenue(int[] prices, int[] algo, int k){
+        int total = 0, n = prices.length;
+        for (int i = 0; i < n; i++) {
+            if (algo[i] == 0) {
+                total -= prices[i];
+            } else {
+                total += prices[i];
+            }
+        }
+        int maxInc = 0, start = 0, end = 0;
+        while (end < n) {
+            while (end - start + 1 > k) {
+                if (algo[start] == 0) {
+                    maxInc -= prices[start];
+                }
+                start++;
+            }
+            if (algo[end] == 0) {
+                maxInc += prices[end];
+            }
+            end++;
+        }
+        return total + maxInc * 2;
+    }
+    public static int maxStockRevenue2(int[] prices, int[] algo, int k) {
         int orgRev = 0, n = prices.length;
         for (int i = 0; i < n; i++) {
             if (algo[i] > 0) {
