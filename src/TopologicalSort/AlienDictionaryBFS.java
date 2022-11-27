@@ -4,13 +4,6 @@ import java.util.*;
 
 public class AlienDictionaryBFS {
     public static String alienOrder(String[] words) {
-        for (int i = 1; i < words.length; i++) {
-            String s1 = words[i - 1];
-            String s2 = words[i];
-            if (s1.length() > s2.length() && s2.equals(s1.substring(0, s2.length()))) {
-                return "";
-            }
-        }
         Map<Character, Integer> indegree = new HashMap<>();
         Map<Character, Set<Character>> adjList = new HashMap<>(); // key: char, value: following neighbors
         for (String w : words) {
@@ -26,6 +19,10 @@ public class AlienDictionaryBFS {
             String cur = words[i];
             String next = words[i + 1];
             int j = 0;
+            // edge case: not lexicographic order
+            if (cur.length() > next.length() && next.equals(cur.substring(0, next.length()))) {
+                return "";
+            }
             while (j < cur.length() && j < next.length()) {
                 char a = cur.charAt(j), b = next.charAt(j);
                 if (a != b) {
@@ -78,7 +75,7 @@ public class AlienDictionaryBFS {
 
     public static void main(String[] args) {
         System.out.println(AlienDictionaryBFS.alienOrder(new String[]{"wrt", "wrf", "er", "ett", "rftt"})); // "wertf"
-        System.out.println(AlienDictionaryBFS.alienOrder(new String[]{"ac","ab","zc","zb"})); // "acbz"
+        System.out.println(AlienDictionaryBFS.alienOrder(new String[]{"ac", "ab", "zc", "zb"})); // "acbz"
         System.out.println(AlienDictionaryBFS.alienOrder(new String[]{"abc", "ab"})); // ""
 
     }
