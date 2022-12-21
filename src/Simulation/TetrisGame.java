@@ -58,7 +58,7 @@ public class TetrisGame {
 //        int[][] figure = {
 //                {0, 0, 1},
 //                {0, 1, 1},
-//                {0, 0, 1}};
+//                {0, 0, 1}}; // Expected output: 0
         int[][] field = {
                 {0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0},
@@ -69,11 +69,11 @@ public class TetrisGame {
         int[][] figure = {
                 {1, 1, 1},
                 {1, 0, 1},
-                {1, 0, 1}};
+                {1, 0, 1}}; // Expected output: 2
 
         TetrisGame sol = new TetrisGame();
         int result = sol.solution(field, figure);
-        System.out.println(result); // Expected output: 0
+        System.out.println(result);
 
     }
 }
