@@ -22,10 +22,6 @@ public class ParkingSpot {
 
     // other
     boolean fit(Vehicle v) {
-        if (currentVehicle == null) {
-            // check if incomeing v fits into this parking spot
-            return true;
-        }
-        return false;
+        return currentVehicle == null && size.getSize() >= v.getSize().getSize();
     }
 }
