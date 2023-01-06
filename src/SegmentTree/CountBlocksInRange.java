@@ -1,7 +1,5 @@
 package SegmentTree;
 
-import java.util.*;
-
 public class CountBlocksInRange {
 }
 
