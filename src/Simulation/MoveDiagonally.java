@@ -15,14 +15,18 @@ public class MoveDiagonally {
             if ((x < 0 && y < 0) || (x < 0 && y >= m) || (x >= n && y >= m) || (x >= n && y < 0)) {
                 dx = -dx;
                 dy = -dy;
+                res++;
+                System.out.println("x1: " + x1 + ", y1: " + y1 + " res: " + res + " (changed direction)");
                 continue;
             } else if (x < 0 || x >= n) { // case 2: x is out of bound
                 dx = -dx;
                 res++;
+                System.out.println("x1: " + x1 + ", y1: " + y1 + " res: " + res + " (changed direction)");
                 continue;
             } else if (y < 0 || y >= m) { // case 3: y is out of bound
                 dy = -dy;
                 res++;
+                System.out.println("x1: " + x1 + ", y1: " + y1 + " res: " + res + " (changed direction)");
                 continue;
             }
 
@@ -46,7 +50,7 @@ public class MoveDiagonally {
     }
 
     public static void main(String[] args) {
-        System.out.println(MoveDiagonally.moveDiagonally(5, 5, 2, 1, 1, 2)); // 7
+//        System.out.println(MoveDiagonally.moveDiagonally(5, 5, 2, 1, 1, 2)); // 7
         System.out.println(MoveDiagonally.moveDiagonally(5, 3, 2, 0, 3, 2)); // -1
     }
 }
