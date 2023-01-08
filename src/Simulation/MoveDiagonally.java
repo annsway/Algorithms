@@ -32,7 +32,7 @@ public class MoveDiagonally {
 
             x1 = x;
             y1 = y;
-            res++;
+            res++; // moved forward
             System.out.println("x1: " + x1 + ", y1: " + y1 + " res: " + res);
             StringBuilder sb = new StringBuilder();
             sb.append(x1).append("#").append(y1).append("#").append(dx).append("#").append(dy);
