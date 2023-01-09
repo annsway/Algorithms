@@ -25,28 +25,31 @@ public class RhombicBorderSum {
     }
 
     private int calBorderSum(int[][] matrix, int r, int c, int radius) {
-        int i = r - radius + 1, j = c, sum = 0;
+        int top = r - radius + 1, right = c + radius - 1,
+                bottom = r + radius - 1, left = c - radius + 1;
+        int sum = 0;
 
-//        System.out.println("i: " + i + " j:" + j);
-        for (int k = 1; k < radius; k++) {
+        int i = top, j = c;
+        System.out.println("i: " + i + " j:" + j);
+        for (int k = 0; k < right - c; k++) {
             System.out.println(matrix[i][j]);
             sum += matrix[i][j];
             i += 1;
             j += 1;
         }
-        for (int k = 1; k < radius; k++) {
+        for (int k = 0; k < bottom - r; k++) {
             System.out.println(matrix[i][j]);
             sum += matrix[i][j];
             i += 1;
             j -= 1;
         }
-        for (int k = 1; k < radius; k++) {
+        for (int k = 0; k < c - left; k++) {
             System.out.println(matrix[i][j]);
             sum += matrix[i][j];
             i -= 1;
             j -= 1;
         }
-        for (int k = 1; k < radius; k++) {
+        for (int k = 0; k < r - top; k++) {
             System.out.println(matrix[i][j]);
             sum += matrix[i][j];
             i -= 1;
