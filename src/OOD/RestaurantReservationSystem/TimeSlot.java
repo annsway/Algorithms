@@ -2,20 +2,13 @@ package OOD.RestaurantReservationSystem;
 
 import java.util.Date;
 
-public class Reservation {
-    private Table table;
-
+public class TimeSlot {
     private Date startTime;
     private Date endTime;
 
-    public Reservation(Table table, Date startTime, Date endTime) {
-        this.table = table;
+    public TimeSlot(Date startTime, Date endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
-    }
-
-    public Table getTable() {
-        return this.table;
     }
 
     public Date getStartTime() {

@@ -1,7 +1,9 @@
 package OOD.RestaurantReservationSystem;
 
+import java.util.Date;
+
 public class NoTableForReservationException extends Exception {
-    public NoTableForReservationException(int time) {
-        super("No table for reservation time period: " + time);
+    public NoTableForReservationException(Date startTime, Date endTime) {
+        super("No table for reservation time period: " + startTime.getTime() + " to " + endTime);
     }
 }
