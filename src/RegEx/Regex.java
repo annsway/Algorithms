@@ -8,13 +8,9 @@ import java.util.regex.Pattern;
 public class Regex {
 
 	public static void main(String args[]) throws FileNotFoundException {
-
-
 		// The regex pattern
 		final String REGEX_PATTERN = "fooa*bar";
-		final String inputFileName = "regex01.txt";
-
-		BufferedReader br = new BufferedReader(new FileReader("regex01.txt"));
+		final String inputFileName = "RegEx/regex01.txt";
 
 		// Create a Pattern object
 		Pattern r = Pattern.compile(REGEX_PATTERN);
